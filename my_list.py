@@ -3,7 +3,7 @@ Created by Joscha Vack on 8/18/2020.
 """
 
 from bs4 import BeautifulSoup
-from os import linesep
+import clipboard
 import argparse
 import re
 
@@ -49,23 +49,31 @@ if __name__ == '__main__':
                         dest='url',
                         action='store_true',
                         help='Extract urls as well')
+    parser.add_argument('--c',
+                        dest='clip',
+                        action='store_true',
+                        help='Use clipboard content instead of input file')
     args = parser.parse_args()
 
-    with open(args.input, 'r') as i:
-        soup = BeautifulSoup(i, 'html.parser')
-        items = soup.find_all('div', {'class': 'boxart-size-16x9 boxart-container'})
-        print('Found %d items:' % len(items))
-        if args.url:
-            # append urls
-            items = ['%s (%s)' % (e.text, re.sub(r'[?].*$', '', e.parent['href'])) for e in items]
-        else:
-            # name only
-            items = [e.text for e in items]
+    if args.clip:
+        soup = BeautifulSoup(clipboard.paste(), 'html.parser')
+    else:
+        with open(args.input, 'r') as i:
+            soup = BeautifulSoup(i, 'html.parser')
 
-        for e in items:
-            print(e)
+    items = soup.find_all('div', {'class': 'boxart-size-16x9 boxart-container'})
+    print('Found %d items:' % len(items))
+    if args.url:
+        # append urls
+        items = ['%s (%s)' % (e.text, re.sub(r'[?].*$', '', e.parent['href'])) for e in items]
+    else:
+        # name only
+        items = [e.text for e in items]
 
-        if args.output:
-            with open('%s.txt' % args.output, 'w') as o:
-                for e in items:
-                    o.write(e + '\n')
+    for e in items:
+        print(e)
+
+    if args.output:
+        with open('%s.txt' % args.output, 'w') as o:
+            for e in items:
+                o.write(e + '\n')
