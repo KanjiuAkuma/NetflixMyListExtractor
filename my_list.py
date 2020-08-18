@@ -62,11 +62,10 @@ if __name__ == '__main__':
             # name only
             items = [e.text for e in items]
 
+        for e in items:
+            print(e)
+
         if args.output:
             with open('%s.txt' % args.output, 'w') as o:
                 for e in items:
-                    print(e)
-                    o.write(e + linesep)
-        else:
-            for e in items:
-                print(e)
+                    o.write(e + '\n')
