@@ -1,6 +1,8 @@
 Netflix My List
 ===
 
+> CLI to Extract names and urls from Netflix's 'My List'
+
 by Kanjiu Akuma
 
 Requirements
