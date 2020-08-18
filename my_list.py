@@ -12,11 +12,11 @@ usage:
 
 Go to https://www.netflix.com/browse/my-list and save the page (right click: `save page as`) to the same directory as my_list.py.
 
-Run `my_list.py` from the command line to extract all items
+Run `my_list.py -o` from the command line to extract all items and save them to mylist.txt
 """
 
 help_i = """\
-Input file; Netflix.html is assumed if not given
+Input file; Netflix.html is assumed if not given.
 Should be a .html file.
 """
 
