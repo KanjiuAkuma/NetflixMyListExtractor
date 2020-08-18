@@ -1,4 +1,4 @@
-Netflix My List Extractor
+Netflix My List
 ===
 
 by Kanjiu Akuma
