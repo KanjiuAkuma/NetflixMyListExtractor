@@ -1,4 +1,4 @@
-Netflix My List
+Netflix My List Extractor
 ===
 
 > CLI to Extract names and urls from Netflix's 'My List'
